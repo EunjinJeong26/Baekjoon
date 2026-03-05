@@ -2,7 +2,6 @@ name: Baekjoon Solved Notification
 
 on:
   push:
-    branches: [ main ]
 
 jobs:
   notify:
@@ -10,7 +9,9 @@ jobs:
 
     steps:
       - name: Send Discord Notification
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
           curl -H "Content-Type: application/json" \
-          -d "{\"content\":\"🔥 기회는 잡는거야 🚀\nRepo: ${{ github.repository }}\nCommit: ${{ github.event.head_commit.message }}\"}" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+          -d "{\"content\":\"📢 기회는 잡는거야 🚀\nRepo: ${{ github.repository }}\nCommit: ${{ github.event.head_commit.message }}\"}" \
+          "$WEBHOOK"
