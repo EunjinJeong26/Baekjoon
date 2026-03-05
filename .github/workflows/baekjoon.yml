@@ -11,7 +11,31 @@ jobs:
       - name: Send Discord Notification
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          ACTOR: ${{ github.actor }}
+          REPO: ${{ github.repository }}
+          COMMIT: ${{ github.event.head_commit.message }}
         run: |
+          if [ "$ACTOR" = "cpas2594" ]; then
+            NAME="현수"
+          elif [ "$ACTOR" = "siyoung24" ]; then
+            NAME="시영"
+          elif [ "$ACTOR" = "BOYEON-06" ]; then
+            NAME="보연"
+          elif [ "$ACTOR" = "EunjinJeong26" ]; then
+            NAME="은진"
+          elif [ "$ACTOR" = "orzxro" ]; then
+            NAME="아영"
+          elif [ "$ACTOR" = "hyeju0116" ]; then
+            NAME="혜주"
+          else
+            NAME="$ACTOR"
+          fi
+
+          TEXT="🔥 기회는 잡는거야 🚀
+          User: $NAME
+          Repo: $REPO
+          Commit: $COMMIT"
+          
           curl -H "Content-Type: application/json" \
           -d "{\"content\":\"📢 기회는 잡는거야 🚀\nRepo: ${{ github.repository }}\nCommit: ${{ github.event.head_commit.message }}\"}" \
           "$WEBHOOK"
