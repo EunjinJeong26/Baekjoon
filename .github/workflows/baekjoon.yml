@@ -1,0 +1,16 @@
+name: Baekjoon Solved Notification
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Discord Notification
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\":\"🔥 기회는 잡는거야 🚀\nRepo: ${{ github.repository }}\nCommit: ${{ github.event.head_commit.message }}\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
