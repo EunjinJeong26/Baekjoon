@@ -1,23 +1,22 @@
 #include <stdio.h>
 
 int main(void){
-    int N, i;
-    int arr[2000000]={0};
+    int N, i, A;
     int min;
     int max;
 
     scanf("%d", &N);
     for(i=0; i<N;i++){
-        scanf(" %d", &arr[i]);
+        scanf(" %d", &A);
         if(i==0){
-            min=arr[i];
-            max = arr[i];
+            min=A;
+            max = A;
         }
-        if(arr[i]<min){
-            min = arr[i];
+        if(A<min){
+            min = A;
         }
-        if(arr[i]>max){
-            max = arr[i];
+        if(A>max){
+            max = A;
         }
     }
 
